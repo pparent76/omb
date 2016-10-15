@@ -1,6 +1,4 @@
-#!/bin/bash
-
-set -e
+#!/bin/bash -e
 
 cp startup-scripts/ttdnsd-survey.sh /etc/
 cp startup-scripts/tor-survey.sh /etc/
@@ -10,5 +8,3 @@ chmod +x /etc/ttdnsd-survey.sh
 chmod +x /etc/tor-survey.sh
 chmod +x /etc/iptables.sh
 chmod +x /etc/rc.local
-
-exit 0

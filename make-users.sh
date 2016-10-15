@@ -1,6 +1,4 @@
-#!/bin/bash
-
-set -e
+#!/bin/bash -xe
 
 mkdir -p /home/www-data/
 chown www-data /home/www-data
@@ -14,5 +12,3 @@ chown mailpile /home/mailpile
 
 touch /var/mail/mailpile
 chown mailpile /var/mail/mailpile
-
-exit 0
