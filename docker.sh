@@ -51,13 +51,13 @@ cmd_create() {
 
     docker create --name=$CONTAINER --hostname=own-mailbox \
         --restart=unless-stopped \
-        --cap-add SYS_ADMIN --cap-add=NET_ADMIN \
+        --cap-add ALL --privileged=true \
         --tmpfs /run --tmpfs /run/lock \
         -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
         -v "$(pwd)":/ownmailbox -w /ownmailbox \
         -p 80:80 -p 443:443 \
         $IMAGE
-        #--privileged=true \
+        #--cap-add SYS_ADMIN --cap-add=NET_ADMIN \
 }
 
 cmd_install() {
