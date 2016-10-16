@@ -63,6 +63,7 @@ cmd_create() {
 cmd_install() {
     cmd_start
     cmd_exec ./main.sh
+    sleep 5
     cmd_stop
     cmd_start
 }

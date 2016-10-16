@@ -4,7 +4,7 @@
 ./required-packages.sh
 ./setup-apache.sh
 
-cp docker-files/postfix /etc/init.d/postfix
+#cp docker-files/postfix /etc/init.d/postfix
 cd Local_postfix_conf
 make install
 cd ..
@@ -17,7 +17,7 @@ cd ..
 
 ./setup-hostname.sh
 
-pkill python2
+#pkill python2
 su mailpile -c ./setup-mailpile.sh
 
 pip install -r /home/mailpile/Mailpile/requirements.txt
@@ -32,10 +32,6 @@ chown tor /var/log/tor.log
 echo "AllowInbound 1" >> /etc/tor/torsocks.conf
 
 ./setup-iptables.sh
-if [ "$?" -ne "0" ] && [[ -z $container ]]; then
-  echo "Error while setting up iptables."
-  exit 1
-fi
 
 # Temporarily use google dns server and flush iptables
 # to make sure the upgrade will be overwritten at first startup
