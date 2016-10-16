@@ -1,10 +1,7 @@
-#!/bin/bash
-
-set -e
+#!/bin/bash -xe
 
 cd /home/mailpile/
-git clone https://github.com/pparent76/Omb-Mailpile.git
-mv Omb-Mailpile Mailpile
+git clone https://github.com/Own-Mailbox/Mailpile
 # Move into the newly created source repo
 cd /home/mailpile/Mailpile
 # Get specific revisions in order to have reproductible results
@@ -15,5 +12,3 @@ virtualenv -p /usr/bin/python2.7 --system-site-packages mp-virtualenv
 
 # Activate the virtual Python environment
 source mp-virtualenv/bin/activate
-
-exit 0

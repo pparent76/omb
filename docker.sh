@@ -32,7 +32,7 @@ cmd_build() {
     local dockerfile=${1:-"debian-jessie"}
 
     datestamp=$(date +%F | tr -d -)
-    nohup_out=nohup-$datestamp.out
+    nohup_out=nohup-ownmailbox-$datestamp.out
     rm -f $nohup_out
     nohup nice docker build --tag=$IMAGE --file="$dockerfile" . > $nohup_out &
     sleep 1
@@ -40,19 +40,31 @@ cmd_build() {
 }
 
 cmd_create() {
+    ### configure the host for running systemd containers
+    if [[ -z $(nsenter --mount=/proc/1/ns/mnt -- mount | grep /sys/fs/cgroup/systemd) ]]; then
+	[[ ! -d /sys/fs/cgroup/systemd ]] && mkdir -p /sys/fs/cgroup/systemd
+	nsenter --mount=/proc/1/ns/mnt -- mount -t cgroup cgroup -o none,name=systemd /sys/fs/cgroup/systemd
+    fi
+    
     cmd_stop
     docker rm $CONTAINER 2>/dev/null
-    docker create --name=$CONTAINER \
-        -v "$(pwd)":/own-mailbox \
-        -w /own-mailbox/ \
-        -p 8085:80 -p 4443:443 \
-        $IMAGE ./docker-files/init.sh
+
+    docker create --name=$CONTAINER --hostname=own-mailbox \
+        --restart=unless-stopped \
+        --cap-add SYS_ADMIN --cap-add=NET_ADMIN \
+        --tmpfs /run --tmpfs /run/lock \
+        -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
+        -v "$(pwd)":/ownmailbox -w /ownmailbox \
+        -p 80:80 -p 443:443 \
+        $IMAGE
         #--privileged=true \
 }
 
 cmd_install() {
     cmd_start
     cmd_exec ./main.sh
+    cmd_stop
+    cmd_start
 }
 
 cmd_exec() {

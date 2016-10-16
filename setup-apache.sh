@@ -1,6 +1,4 @@
-#!/bin/bash
-
-set -e
+#!/bin/bash -xe
 
 mkdir -p /etc/letsencrypt/
 cp options-ssl-apache.conf /etc/letsencrypt/
@@ -22,4 +20,3 @@ rm -rvf /var/www/*
 #Add OK file
 echo "OK" > /var/www/OK
 
-exit 0

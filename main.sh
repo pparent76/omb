@@ -1,69 +1,26 @@
-#!/bin/bash
-
-set -x
+#!/bin/bash -xe
 
 ./cleanup.sh
 ./required-packages.sh
-if [ "$?" -ne "0" ]; then
-  echo "Error while installing required debian packages."
-  echo "Please check your apt-get config."
-  exit 1
-fi
-
 ./setup-apache.sh
-if [ "$?" -ne "0" ]; then
-  echo "Error while setting up apache."
-  exit 1
-fi
 
-cd Local_postfix_conf && make install && cd ..
-if [ "$?" -ne "0" ]; then
-  echo "Error while setting up postfix."
-  exit 1
-fi
+cp docker-files/postfix /etc/init.d/postfix
+cd Local_postfix_conf
+make install
+cd ..
 
 ./install-repositories.sh
-if [ "$?" -ne "0" ]; then
-  echo "Error while installing Own-Mailbox git repositories."
-  exit 1
-fi
-
 ./make-users.sh
-if [ "$?" -ne "0" ]; then
-  echo "Error while setting up users."
-  exit 1
-fi
-
 ./setup-startup.sh
-if [ "$?" -ne "0" ]; then
-  echo "Error while setting up startup."
-  exit 1
-fi
 
 ./setup-rng-tool.sh
-if [ "$?" -ne "0" ]; then
-  echo "Error while setting up rng-tools."
-  exit 1
-fi
 
 ./setup-hostname.sh
-if [ "$?" -ne "0" ]; then
-  echo "Error while setting up hostname."
-  exit 1
-fi
 
 pkill python2
 su mailpile -c ./setup-mailpile.sh
-if [ "$?" -ne "0" ]; then
-  echo "Error while setting up mailpile."
-  exit 1
-fi
 
 pip install -r /home/mailpile/Mailpile/requirements.txt
-if [ "$?" -ne "0" ]; then
-  echo "Error while setting up mailpile."
-  exit 1
-fi
 
 mkdir /etc/omb/
 chown www-data /etc/omb/
@@ -73,13 +30,9 @@ cp torrc /etc/tor/torrc
 touch /var/log/tor.log
 chown tor /var/log/tor.log
 echo "AllowInbound 1" >> /etc/tor/torsocks.conf
-if [ "$?" -ne "0" ]; then
-  echo "Error while setting up torsocks."
-  exit 1
-fi
 
 ./setup-iptables.sh
-if [ "$?" -ne "0" ] && [ "$DOCKER" != "yes" ]; then
+if [ "$?" -ne "0" ] && [[ -z $container ]]; then
   echo "Error while setting up iptables."
   exit 1
 fi
@@ -97,10 +50,8 @@ apt-get upgrade -y
 # Make sure to sync every minute
 (crontab -l 2>/dev/null; echo "* * * * * sync") | crontab -
 
-if [ "$DOCKER" != "yes" ]; then
+if [[ -z $container ]]; then
   echo "Rebooting in 5 seconds..."
   sleep 5
   reboot
 fi
-
-exit 0

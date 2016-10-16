@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 echo "---------------------------------------------------------------------------------------------"
 echo "Do you want to install rng-tools?"
@@ -22,5 +22,3 @@ if [ "$test" = "y" ]; then
   echo "Installing rng-tools"
   apt-get install rng-tools || exit 1
 fi
-
-exit 0
