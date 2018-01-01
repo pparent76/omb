@@ -1,12 +1,37 @@
-Own-Mailbox Docker install
-=========
+# Own-Mailbox Server
 
-First install docker on your machine (https://docs.docker.com/engine/installation/linux/debian/).
-Then edit the file **debian-jessie** and modify the first line so that it reads like this: `FROM debian:jessie` (delete the `armhfbuild` from it, which is specific for RaspberryPi).
+## Installation
 
-+ ./docker.sh build
-+ ./docker.sh create
-+ ./docker.sh install
-+ ./docker.sh shell
++ First install docker: https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/
 
-Then you can access the web interface at the address http://localhost:80/
++ Then install Docker-Scripts: https://github.com/docker-scripts/ds#installation
+  ```
+  git clone https://github.com/docker-scripts/ds /opt/docker-scripts/ds
+  cd /opt/docker-scripts/ds/
+  make install
+  ```
+
++ Next, get code, init the workdir, and fix/customize the settings:
+  ```
+  git clone https://github.com/Own-Mailbox/proxy /opt/docker-scripts/omb/server
+  ds init omb/server @omb
+  cd /var/ds/omb
+  vim settings.sh
+  ```
+
++ Finally create and start the container:
+  ```
+  cd /var/ds/omb
+  ds make
+  ```
+  The last command is actually a shortcut for `ds build; ds create; ds config`.
+
+
+## Maintenance
+
+Try:
+
+    ds stop
+    ds start
+    ds shell
+    ds help
