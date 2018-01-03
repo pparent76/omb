@@ -21,7 +21,7 @@ iptables -A OUTPUT -d 10.0.0.0/8     -p udp --destination-port 53 -j DROP
 iptables -A OUTPUT -d 172.16.0.0/12  -p udp --destination-port 53 -j DROP
 
 # Accept tor output connections
-iptables -A OUTPUT -m owner --uid-owner tor -j ACCEPT
+iptables -A OUTPUT -m owner --uid-owner debian-tor -j ACCEPT
 
 # Accept local network outgoing connections
 iptables -A OUTPUT -d 127.0.0.0/8    -j ACCEPT
