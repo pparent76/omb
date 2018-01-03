@@ -47,6 +47,14 @@ cat <<EOF > /etc/apache2/sites-available/default.conf
         Require all granted
     </Directory>
 
+    <Directory "/var/www/first/">
+        Require all denied
+        # allow from local network
+        Require ip 192.168
+        Require ip 172.16.0
+        Require ip 10
+    </Directory>
+
     SSLEngine on
     SSLCertificateFile    /etc/ssl/certs/ssl-cert-snakeoil.pem
     SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
