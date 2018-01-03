@@ -35,6 +35,3 @@ RUN DEBIAN_FRONTEND=noninteractive \
 	postfix-pcre procmail python-dev python-jinja2 python-lxml \
 	python-pgpdump python-pip python-virtualenv rsyslog \
 	spambayes sudo tor torsocks wget zlib1g-dev
-
-#COPY docker-files/postfix /etc/init.d/postfix
-
