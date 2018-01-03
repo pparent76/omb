@@ -20,4 +20,18 @@ chown mailpile -R mp-virtualenv
 # Activate the virtual Python environment
 su mailpile -c "source mp-virtualenv/bin/activate"
 
+pip install --upgrade pip
 pip install -r /home/mailpile/Mailpile/requirements.txt
+
+# Configure Apache2 to access Mailpile
+cat <<EOF > /etc/apache2/conf-available/mailpile.conf
+ProxyRequests On
+ProxyVia On
+Alias "/mailpile/default-theme" "/home/mailpile/Mailpile/shared-data/default-theme"
+Alias "/mailpile" "/home/mailpile/Mailpile/shared-data/multipile/www"
+ProxyPass /Mailpile/ http://localhost:33411/Mailpile/ connectiontimeout=100 timeout=100
+ProxyPassReverse / http://localhost:33411/
+EOF
+a2enmod proxy
+a2enconf mailpile
+service apache2 restart

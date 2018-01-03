@@ -1,5 +1,7 @@
 #!/bin/bash -x
 
+### ToDo: Most of the stuff here seems unnecessary, maybe it should be deleted.
+
 source /host/settings.sh
 
 echo "own-mailbox" > /etc/hostname
