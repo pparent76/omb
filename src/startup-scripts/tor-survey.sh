@@ -1,5 +1,7 @@
 #!/bin/bash
 
+### ToDo: Can this be replaced by monit?
+
 while true; do
 
   # sleep 300 but restart tor if the process is down
