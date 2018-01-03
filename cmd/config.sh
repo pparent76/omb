@@ -18,7 +18,6 @@ cmd_config() {
     ds inject cfg/postfix.sh
     ds inject cfg/repos.sh
     ds inject cfg/startup.sh
-    ds inject cfg/rng-tools.sh
     ds inject cfg/mailpile.sh
     ds inject cfg/tor.sh
     ds inject cfg/iptables.sh
@@ -27,7 +26,7 @@ cmd_config() {
     # install and config extra things that help development
     if [[ $DEV == 'true' ]]; then
         ds inject phpmyadmin.sh
-        ds exec apt -y install vim aptitude
+        ds exec apt -y install vim aptitude iputils-ping
     fi
 
     ds restart

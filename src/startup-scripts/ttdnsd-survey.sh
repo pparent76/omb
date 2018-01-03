@@ -1,5 +1,7 @@
 #!/bin/bash
 
+### ToDo: Can this be replaced by Monit?
+
 while true; do
 
   # Try 3 times to resolve own-mailbox.com
