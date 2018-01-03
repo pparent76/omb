@@ -18,7 +18,6 @@ cmd_config() {
     ds inject cfg/postfix.sh
     ds inject cfg/repos.sh
     ds inject cfg/startup.sh
-    ds inject cfg/rng-tools.sh
     ds inject cfg/mailpile.sh
     ds inject cfg/tor.sh
     ds inject cfg/iptables.sh

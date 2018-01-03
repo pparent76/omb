@@ -1,5 +1,7 @@
 #!/bin/bash -x
 
+source /host/settings.sh
+
 echo "own-mailbox" > /etc/hostname
 echo "127.0.0.1 own-mailbox" >> /etc/hosts
 
@@ -23,3 +25,6 @@ apt-get upgrade -y
 
 # Make sure to sync every minute
 (crontab -l 2>/dev/null; echo "* * * * * sync") | crontab -
+
+### install rng-tools
+[[ $INSTALL_RNG_TOOLS == 'yes' ]] && apt-get install rng-tools
