@@ -13,7 +13,7 @@
 
 + Next, get code, init the workdir, and fix/customize the settings:
   ```
-  git clone https://github.com/Own-Mailbox/proxy /opt/docker-scripts/omb/server
+  git clone https://github.com/Own-Mailbox/docker /opt/docker-scripts/omb/server
   ds init omb/server @omb
   cd /var/ds/omb
   vim settings.sh
