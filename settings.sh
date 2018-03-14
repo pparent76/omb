@@ -1,4 +1,4 @@
-APP=Own-Mailbox/docker
+APP=omb
 IMAGE=omb
 CONTAINER=omb
 PORTS="80:80 443:443"
