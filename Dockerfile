@@ -17,14 +17,14 @@ CMD ["/sbin/init"]
 
 ### Update and upgrade and install some other packages.
 RUN apt update && apt -y upgrade
-RUN apt -y install apt-utils apt-transport-https gnupg && \
+RUN apt -y install apt-utils apt-transport-https && \
     apt -y remove openresolv network-manager && \
     apt -y install rsyslog logrotate logwatch ssmtp
 
 ### Install mariadb.
-RUN apt -y install software-properties-common && \
+RUN apt -y install software-properties-common dirmngr && \
     apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8 && \
-    add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://ftp.utexas.edu/mariadb/repo/10.2/ubuntu xenial main' && \
+    add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://ftp.utexas.edu/mariadb/repo/10.2/debian stretch main' && \
     apt update
 RUN DEBIAN_FRONTEND=noninteractive \
     apt -y install mariadb-server mariadb-client
