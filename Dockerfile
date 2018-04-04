@@ -1,5 +1,8 @@
-FROM ubuntu:16.04
+FROM debian:stretch
 ENV container docker
+RUN apt update && apt -y upgrade
+RUN echo "resolvconf resolvconf/linkify-resolvconf boolean false" | debconf-set-selections
+RUN apt -y install systemd resolvconf
 # Don't start any optional services except for the few we need.
 RUN find /etc/systemd/system \
          /lib/systemd/system \
@@ -9,6 +12,7 @@ RUN find /etc/systemd/system \
          -not -name '*systemd-user-sessions*' \
          -exec rm \{} \;
 RUN systemctl set-default multi-user.target
+RUN ln -s /lib/systemd/systemd /sbin/init
 CMD ["/sbin/init"]
 
 ### Update and upgrade and install some other packages.
