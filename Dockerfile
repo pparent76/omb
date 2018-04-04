@@ -17,8 +17,8 @@ CMD ["/sbin/init"]
 
 ### Update and upgrade and install some other packages.
 RUN apt-get update && apt-get -y upgrade
-RUN apt-get -y install apt-utils apt-transport-https && \
-    apt-get -y remove resolvconf openresolv network-manager && \
+RUN apt-get -y install apt-utils apt-transport-https gnupg && \
+    apt-get -y remove openresolv network-manager && \
     apt-get -y install rsyslog logrotate logwatch ssmtp
 
 ### Install mariadb.
