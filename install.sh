@@ -27,8 +27,8 @@ msg_if_failed "Error while installing Own-Mailbox git repositories."
 ./scripts/cfg/users.sh
 msg_if_failed "Error while setting up users."
 
-./scripts/cfg/maipile.sh
-msg_if_failed "Error while installing Own-Mailbox git repositories."
+./scripts/cfg/mailpile.sh
+msg_if_failed "Error while installing Mailpile."
 
 ./scripts/cfg/startup.sh
 msg_if_failed "Error while setting up startup."
