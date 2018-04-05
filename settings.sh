@@ -4,8 +4,8 @@ CONTAINER=omb
 PORTS="80:80 443:443"
 
 #This proxy will give subdomains of MASTER_DOMAIN
-MASTER_DOMAIN=example.org
-FQDN=omb.$MASTER_DOMAIN
+MASTER_DOMAIN=omb.one
+FQDN=proxy.$MASTER_DOMAIN
 PROXY=proxy.$MASTER_DOMAIN
 EMAIL=contact@omb.example.org
 
