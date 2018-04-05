@@ -1,17 +1,29 @@
-#!/bin/bash -x
+#!/bin/bash
 
-cd /opt/Own-Mailbox
-git clone --branch alpha https://github.com/Own-Mailbox/cs-com
+################################################
+#	Install omb sub repositories
+# (ihm, cs-com and ttdns)
+################################################
+set -e
+
+cp settings.sh /root/
+cd /root/
+rm -rf ihm/
+git clone https://github.com/Own-Mailbox/ihm
+cp settings.sh ihm/omb-config.sh
+cd ihm/
+make
+
+cd /root/
+rm -rf cs-com/
+git clone https://github.com/Own-Mailbox/cs-com
 cd cs-com/client/
 make && make install
 
-mkdir -p /opt/Own-Mailbox
-cd /opt/Own-Mailbox
-git clone --branch alpha https://github.com/Own-Mailbox/ihm
-cd ihm
-make
-
-cd /opt/Own-Mailbox
-git clone --branch alpha https://github.com/Own-Mailbox/ttdnsd
-cd ttdnsd
+cd /root/
+rm -rf ttdnsd/
+git clone https://github.com/Own-Mailbox/ttdnsd
+cd ttdnsd/
 make install
+
+exit 0

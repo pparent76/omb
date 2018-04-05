@@ -1,7 +1,22 @@
-#!/bin/bash -x
+#!/bin/bash
 
-# Flush iptables
+###############################################
+#	 Setup and save iptables into the system 
+###############################################
+
+set -e
+
+if [ -f /.dockerenv ]; then
+    echo "Iptables don't work in docker"
+    exit 0;
+fi
+
+modprobe ip_tables
+
+
 iptables -F
+ip6tables -F
+
 
 # Accept incoming connections from local network
 iptables -A INPUT -s 127.0.0.0/8    -j ACCEPT
@@ -10,7 +25,7 @@ iptables -A INPUT -s 10.0.0.0/8     -j ACCEPT
 iptables -A INPUT -s 172.16.0.0/12  -j ACCEPT
 
 # Allow established or related connections
-iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT 
 
 # Drop everyhting else
 iptables -A INPUT -j DROP
@@ -21,7 +36,7 @@ iptables -A OUTPUT -d 10.0.0.0/8     -p udp --destination-port 53 -j DROP
 iptables -A OUTPUT -d 172.16.0.0/12  -p udp --destination-port 53 -j DROP
 
 # Accept tor output connections
-iptables -A OUTPUT -m owner --uid-owner debian-tor -j ACCEPT
+iptables -A OUTPUT -m owner --uid-owner tor -j ACCEPT
 
 # Accept local network outgoing connections
 iptables -A OUTPUT -d 127.0.0.0/8    -j ACCEPT
@@ -32,17 +47,11 @@ iptables -A OUTPUT -d 172.16.0.0/12  -j ACCEPT
 # Drop all other outgoing connections
 iptables -A OUTPUT -j DROP
 
-# Save iptables so that they are loaded automatically on reboot
-iptables-save > /etc/iptables/rules.v4
-
 ################################################################
 #			IPV6
 ################################################################
 
-# Flush ip6tables
-ip6tables -F
-
-# Drop all outgoing connection except for ::1
+#Drop all outgoing connection except for ::1
 ip6tables -A OUTPUT -d ::1 -j ACCEPT
 ip6tables -A OUTPUT -j DROP
 
@@ -50,10 +59,12 @@ ip6tables -A OUTPUT -j DROP
 ip6tables -A INPUT -s ::1 -d ::1 -j ACCEPT
 
 # Allow established or related connections
-ip6tables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+ip6tables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT 
 
 # Drop everyhting else
 ip6tables -A INPUT -j DROP
 
-# Save ip6tables so that they are loaded automatically on reboot
+iptables-save > /etc/iptables/rules.v4
 ip6tables-save > /etc/iptables/rules.v6
+
+exit 0
