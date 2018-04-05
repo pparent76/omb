@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-. ./../settings.sh
+. ./settings.sh
 
 set -e
 
