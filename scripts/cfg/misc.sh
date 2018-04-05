@@ -1,12 +1,5 @@
 #!/bin/bash
 
-pkill python2
-su mailpile -c ./scripts/cfg/mailpile.sh
-msg_if_failed  "Error while setting up mailpile."
-
-pip install -r /home/mailpile/Mailpile/requirements.txt
-msg_if_failed  "Error while setting up mailpile."
-
 
 mkdir /etc/omb/
 chown www-data /etc/omb/
