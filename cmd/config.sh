@@ -13,6 +13,10 @@ cmd_config() {
 #     ds inject mariadb.sh
     #ds inject ssmtp.sh
 
+    
+    ds inject setup-debian-jessie-backport.sh
+    ds inject packages.sh
+    
     # run custom config scripts
     ds inject cfg/apache2.sh
     ds inject cfg/postfix.sh
