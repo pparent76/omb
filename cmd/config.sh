@@ -21,13 +21,14 @@ cmd_config() {
     ds inject cfg/apache2.sh
     ds inject cfg/postfix.sh
     ds inject cfg/repos.sh
+    ds inject cfg/users.sh  
+    ds inject cfg/mailpile.sh      
     ds inject cfg/startup.sh
-    ds inject cfg/mailpile.sh
-    ds inject cfg/tor.sh
-    ds inject cfg/iptables.sh
-    ds inject cfg/hostname.sh
-    ds inject cfg/make-users.sh    
-
+    ds inject cfg/rng-tool.sh
+    ds inject cfg/hostname.sh    
+    ds inject cfg/misc.sh   
+    ds inject cfg/iptables.sh   
+    
     # install and config extra things that help development
     if [[ $DEV == 'true' ]]; then
         ds inject phpmyadmin.sh

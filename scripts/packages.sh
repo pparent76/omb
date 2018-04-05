@@ -16,6 +16,8 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y apache2 build-essential curl d
 
 apt-get install -y certbot -t jessie-backports
 
+apt-get upgrade -y
+
 service mysql start
 
 exit 0
