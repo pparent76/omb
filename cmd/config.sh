@@ -21,7 +21,8 @@ cmd_config() {
     ds inject cfg/mailpile.sh
     ds inject cfg/tor.sh
     ds inject cfg/iptables.sh
-    ds inject cfg/misc.sh
+    ds inject cfg/hostname.sh
+    ds inject cfg/make-users.sh    
 
     # install and config extra things that help development
     if [[ $DEV == 'true' ]]; then
