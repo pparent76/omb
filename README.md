@@ -1,6 +1,17 @@
 # Own-Mailbox Server
 
-## Installation
+## Installation on a debian Jessie operating system
+
+Before running these steps make sure you have a clean and fresh install of debian Jessie with no particular configuration at all (except network), that is correctly connected to your local network in dhcp.
+
+Warning!!! This will transform your machine into an Own-Mailbox, do not execute this on a machine that you use for something else than hosting Own-Mailbox. Do not Install on a computer that you use as a desktop or laptop computer. Do not install on a machine that is not on your local network.
+
+In order to install Own-Mailbox run this command:
+
++ ./install.sh
+
+
+## Installation with Docker
 
 + First install docker: https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/
 
@@ -26,12 +37,20 @@
   ```
   The last command is actually a shortcut for `ds build; ds create; ds config`.
 
+    
+## Installation in a virtual Machine with Vagrant
 
-## Maintenance
+Install vagrant and Virtualbox. The following command will install your own-mailbox:
 
-Try:
++ cd Vagrant
++ vagrant up
 
-    ds stop
-    ds start
-    ds shell
-    ds help
+You can access the vm web interface at:
+
+http://127.0.0.1:8080
+
+You may ssh into the vm with:
+
++ vagrant ssh
+
+For more details see: https://www.vagrantup.com/docs/getting-started/
