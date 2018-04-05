@@ -1,5 +1,6 @@
 #!/bin/bash
 
+pip install -r /home/mailpile/Mailpile/requirements.txt
 
 mkdir /etc/omb/
 chown www-data /etc/omb/

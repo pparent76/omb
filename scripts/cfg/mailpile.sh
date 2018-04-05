@@ -3,6 +3,8 @@
 ################################################
 #	Setup mailpile webmail
 ################################################
+pkill python2
+
 set -e
 
 cd /home/mailpile/
@@ -16,7 +18,5 @@ virtualenv -p /usr/bin/python2.7 --system-site-packages mp-virtualenv
 
 # Activate the virtual Python environment
 source mp-virtualenv/bin/activate
-
-pip install -r /home/mailpile/Mailpile/requirements.txt
 
 exit 0

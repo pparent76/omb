@@ -27,9 +27,6 @@ msg_if_failed "Error while installing Own-Mailbox git repositories."
 ./scripts/cfg/users.sh
 msg_if_failed "Error while setting up users."
 
-./scripts/cfg/mailpile.sh
-msg_if_failed "Error while installing Mailpile."
-
 ./scripts/cfg/startup.sh
 msg_if_failed "Error while setting up startup."
 
@@ -38,6 +35,9 @@ msg_if_failed  "Error while setting up rng-tools."
 
 ./scripts/cfg/hostname.sh
 msg_if_failed  "Error while setting up hostname."
+
+su mailpile -c ./scripts/cfg/mailpile.sh
+msg_if_failed "Error while installing Mailpile."
 
 ./scripts/cfg/misc.sh
 msg_if_failed  "Error whith Miscleanous settings."
