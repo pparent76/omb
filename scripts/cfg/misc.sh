@@ -29,4 +29,4 @@ apt-get upgrade -y
 (crontab -l 2>/dev/null; echo "* * * * * sync") | crontab -
 
 ### install rng-tools
-[[ $INSTALL_RNG_TOOLS == 'yes' ]] && apt-get install rng-tools
+[[ $INSTALL_RNG_TOOLS == 'yes' ]] && apt-get install -y rng-tools
