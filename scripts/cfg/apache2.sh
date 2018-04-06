@@ -6,7 +6,7 @@
 
 set -e
 
-. ./settings.sh
+source /host/settings.sh
 
 mkdir -p /etc/letsencrypt/
 cp src/apache2/options-ssl-apache.conf /etc/letsencrypt/

@@ -6,7 +6,7 @@ mkdir /etc/omb/
 chown www-data /etc/omb/
 echo "nameserver 127.0.0.1" > /etc/resolv.conf.head
 
-cp src/tor/torrc /etc/tor/torrc
+cp $APP_DIR/src/tor/torrc /etc/tor/torrc
 touch /var/log/tor.log
 chown tor /var/log/tor.log
 

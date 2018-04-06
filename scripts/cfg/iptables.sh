@@ -6,11 +6,6 @@
 
 set -e
 
-if [ -f /.dockerenv ]; then
-    echo "Iptables don't work in docker"
-    exit 0;
-fi
-
 modprobe ip_tables
 
 

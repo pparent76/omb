@@ -6,11 +6,10 @@
 ################################################
 set -e
 
-cp settings.sh /root/
 cd /root/
 rm -rf ihm/
 git clone https://github.com/Own-Mailbox/ihm
-cp settings.sh ihm/omb-config.sh
+cp /host/settings.sh ihm/omb-config.sh
 cd ihm/
 make
 
