@@ -9,14 +9,14 @@ set -e
 source /host/settings.sh
 
 mkdir -p /etc/letsencrypt/
-cp src/apache2/options-ssl-apache.conf /etc/letsencrypt/
+cp $APP_DIR/src/apache2/options-ssl-apache.conf /etc/letsencrypt/
 
 a2enmod proxy_http
 a2enmod cgi
 a2enmod ssl
 a2dissite "*"
 rm /etc/apache2/sites-available/*
-cp src/apache2/* /etc/apache2/sites-available/
+cp $APP_DIR/src/apache2/* /etc/apache2/sites-available/
 
 #Replace MASTER_DOMAIN
 sed -i "s/MASTER_DOMAIN/$MASTER_DOMAIN/g"  /etc/apache2/sites-available/https.conf

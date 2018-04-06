@@ -5,9 +5,9 @@ source /host/settings.sh
 
 set -e
 
-cp src/startup-scripts/ttdnsd-survey.sh /etc/
-cp src/startup-scripts/tor-survey.sh /etc/
-cp src/startup-scripts/rc.local /etc/
+cp $APP_DIR/src/startup-scripts/ttdnsd-survey.sh /etc/
+cp $APP_DIR/src/startup-scripts/tor-survey.sh /etc/
+cp $APP_DIR/src/startup-scripts/rc.local /etc/
 chmod +x /etc/ttdnsd-survey.sh
 chmod +x /etc/tor-survey.sh
 chmod +x /etc/rc.local
