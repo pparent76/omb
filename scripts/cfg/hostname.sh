@@ -1,5 +1,4 @@
-#!/bin/bash
-
+#!/bin/bash -x
 #Setup the correct hostnme
 
 set -e

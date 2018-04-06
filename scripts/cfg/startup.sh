@@ -1,9 +1,8 @@
 #!/bin/bash
-
+set -e
+set -x
 
 source /host/settings.sh
-
-set -e
 
 cp $APP_DIR/src/startup-scripts/ttdnsd-survey.sh /etc/
 cp $APP_DIR/src/startup-scripts/tor-survey.sh /etc/

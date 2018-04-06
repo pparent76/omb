@@ -21,6 +21,6 @@ RUN DEBIAN_FRONTEND=noninteractive \
         openssh-server openssl postfix postfix-mysql postfix-pcre \
         procmail python-dev python-jinja2 python-lxml python-pgpdump \
         python-pip python-virtualenv rsyslog spambayes sudo \
-        tor torsocks wget zlib1g-dev
+        tor torsocks wget zlib1g-dev kmod
 
 CMD ["/sbin/init"]
